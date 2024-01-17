@@ -1,15 +1,22 @@
+import { twMerge } from "tailwind-merge";
 import { type ProductType } from "../types";
 
 export const ProductDescription = ({
-	product: { name, description, price },
+	product: { title, description, price },
+	className,
 }: {
 	product: ProductType;
+	className?: string;
 }) => {
+	const wrapperClass = twMerge(
+		"flex flex-col border border-slate-400 bg-slate-200 p-4 text-slate-900",
+		className,
+	);
 	return (
-		<div className="flex h-32 flex-col text-slate-900">
-			<h3 className="title-font text-lg font-medium">{name}</h3>
-			<p className="mt-2 flex-grow">{description}</p>
-			<p className="mb-1 mt-2">${price}</p>
+		<div className={wrapperClass}>
+			<h3 className="title-font self-center text-lg font-medium">{title}</h3>
+			<p className="mt-2 h-20 overflow-hidden">{description}</p>
+			<p className="mb-1 mt-2 self-center">${price}</p>
 		</div>
 	);
 };
