@@ -1,5 +1,5 @@
-import { ProductsList } from "../ui/organisms/ProductsList";
-import { type ProductType } from "../ui/types";
+import { ProductsList } from "../../../ui/organisms/ProductsList";
+import { type ProductType } from "../../../ui/types";
 
 const products: ProductType[] = [
 	{
@@ -32,9 +32,9 @@ const products: ProductType[] = [
 	},
 ];
 
-export default function Home() {
+export default function Products() {
 	return (
-		<section className="p-8">
+		<section>
 			<ProductsList products={products} />
 		</section>
 	);
