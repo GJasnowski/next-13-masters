@@ -5,20 +5,22 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
-type ActiveLinkProps = {
-	href: Route;
-	exact?: boolean;
-	className?: string;
+export type ActiveLinkProps = {
 	activeClassName?: string;
+	ariaLabel?: string;
 	children: React.ReactNode;
+	className?: string;
+	exact?: boolean;
+	href: Route;
 };
 
 export const ActiveLink = ({
-	href,
+	activeClassName,
+	ariaLabel,
 	children,
 	className,
-	activeClassName,
 	exact = false,
+	href,
 }: ActiveLinkProps) => {
 	const pathname = usePathname();
 	const active = exact ? href === pathname : pathname.startsWith(href);
@@ -28,6 +30,7 @@ export const ActiveLink = ({
 			href={href}
 			className={twMerge(className, active && activeClassName)}
 			aria-current={active ? "page" : undefined}
+			aria-label={ariaLabel}
 		>
 			{children}
 		</Link>

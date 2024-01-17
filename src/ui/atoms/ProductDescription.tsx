@@ -9,14 +9,14 @@ export const ProductDescription = ({
 	className?: string;
 }) => {
 	const wrapperClass = twMerge(
-		"flex flex-col border border-slate-400 bg-slate-200 p-4 text-slate-900",
+		"flex flex-col border border-slate-400 bg-slate-200 p-3 text-slate-900",
 		className,
 	);
 	return (
 		<div className={wrapperClass}>
 			<h3 className="title-font self-center text-lg font-medium">{title}</h3>
 			<p className="mt-2 h-20 overflow-hidden">{description}</p>
-			<p className="mb-1 mt-2 self-center font-bold">${price}</p>
+			<p className="mt-2 self-center font-bold">${price}</p>
 		</div>
 	);
 };

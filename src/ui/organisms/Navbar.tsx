@@ -1,27 +1,17 @@
-import { ActiveLink } from "../atoms/ActiveLink";
+import { type Route } from "next";
+import { NavbarLink } from "../atoms/NavbarLink";
 
 export const Navbar = () => {
 	return (
-		<nav className="flex w-full justify-center bg-slate-900 p-4">
-			<ul className="flex w-96 justify-around">
+		<nav className="flex w-full justify-center bg-slate-900">
+			<ul className="flex w-full max-w-7xl justify-start p-4">
 				<li>
-					<ActiveLink
-						href="/"
-						className="text-slate-100 hover:text-amber-200"
-						activeClassName="text-amber-300"
-						exact
-					>
+					<NavbarLink href="/" exact>
 						Home
-					</ActiveLink>
+					</NavbarLink>
 				</li>
 				<li>
-					<ActiveLink
-						href="/products"
-						className="hover:text-amber-200"
-						activeClassName="text-amber-300"
-					>
-						All
-					</ActiveLink>
+					<NavbarLink href={"/products" as Route}>All</NavbarLink>
 				</li>
 			</ul>
 		</nav>
