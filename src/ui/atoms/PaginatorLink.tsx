@@ -15,7 +15,6 @@ export const PaginatorLink = ({
 			{...additionalProps}
 			className={paginatorLinkClassName}
 			activeClassName={activePaginatorLinkClassName}
-			ariaLabel="pagination"
 		>
 			<div className="rounded-full bg-slate-800 px-3 py-1">{children}</div>
 		</ActiveLink>

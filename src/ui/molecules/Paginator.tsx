@@ -14,7 +14,7 @@ const getHref = (hrefBase: string, targetPage: number): Route => {
 
 export const Paginator = ({ currentPage, hrefBase, totalPages }: PaginatorProps) => {
 	return (
-		<div className="flex">
+		<div className="flex" aria-label="pagination">
 			{[
 				{ page: currentPage - 1, shouldRender: isBetween(2, totalPages, currentPage) },
 				{ page: currentPage, shouldRender: isBetween(1, totalPages, currentPage) },
