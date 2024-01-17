@@ -7,10 +7,10 @@ export const ProductListItem = ({ product }: { product: ProductType }) => {
 	return (
 		<li className="rounded-lgtext-center col-span-1 flex flex-col shadow transition-all hover:scale-105">
 			<Link href={`/products/${product.id}`}>
-				<div className="flex justify-center">
-					<ProductImage product={product} className="h-64 rounded-t-xl" />
+				<div className="flex items-end justify-center">
+					<ProductImage product={product} className="h-64 rounded-t-xl bg-slate-800" />
 				</div>
-				<div className="rounded-b-lg ">
+				<div className="rounded-b-lg">
 					<ProductDescription product={product} className="rounded-b-xl" />
 				</div>
 			</Link>
