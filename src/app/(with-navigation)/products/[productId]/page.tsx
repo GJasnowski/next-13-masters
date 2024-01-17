@@ -1,7 +1,15 @@
-export default function Product({ params: { productId } }: { params: { productId: string } }) {
+import { getProduct } from "@/api/products";
+import { ProductShowcase } from "@/ui/organisms/ProductShowcase";
+
+export default async function Product({
+	params: { productId },
+}: {
+	params: { productId: string };
+}) {
+	const product = await getProduct(productId);
 	return (
 		<section>
-			<h1>Product {productId}</h1>
+			<ProductShowcase product={product} />
 		</section>
 	);
 }

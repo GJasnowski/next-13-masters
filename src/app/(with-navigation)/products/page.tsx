@@ -1,4 +1,5 @@
 import { ProductsList } from "../../../ui/organisms/ProductsList";
+import { Title } from "@/ui/atoms/Title";
 import { getProducts } from "@/api/products";
 
 export default async function Products() {
@@ -6,6 +7,7 @@ export default async function Products() {
 
 	return (
 		<section>
+			<Title>All products</Title>
 			<ProductsList products={products} />
 		</section>
 	);

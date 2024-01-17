@@ -16,7 +16,7 @@ export const ProductDescription = ({
 		<div className={wrapperClass}>
 			<h3 className="title-font self-center text-lg font-medium">{title}</h3>
 			<p className="mt-2 h-20 overflow-hidden">{description}</p>
-			<p className="mb-1 mt-2 self-center">${price}</p>
+			<p className="mb-1 mt-2 self-center font-bold">${price}</p>
 		</div>
 	);
 };

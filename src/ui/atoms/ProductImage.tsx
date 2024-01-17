@@ -8,7 +8,7 @@ export const ProductImage = ({
 	product: ProductType;
 	className?: string;
 }) => {
-	const wrapperClass = twMerge("h-64 overflow-hidden", className);
+	const wrapperClass = twMerge("overflow-hidden", className);
 	return (
 		<div className={wrapperClass}>
 			<img src={imageSrc} alt={description} />
