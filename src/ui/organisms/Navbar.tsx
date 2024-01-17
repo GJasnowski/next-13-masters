@@ -9,6 +9,7 @@ export const Navbar = () => {
 						href="/"
 						className="text-slate-100 hover:text-amber-200"
 						activeClassName="text-amber-300"
+						exact
 					>
 						Home
 					</ActiveLink>
