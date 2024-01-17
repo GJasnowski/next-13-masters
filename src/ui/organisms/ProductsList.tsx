@@ -6,19 +6,25 @@ import { productsPagesCount } from "@/utils/constants";
 export const ProductsList = ({
 	products,
 	currentPage,
+	hidePaginator = false,
 }: {
 	products: ProductType[];
 	currentPage: number;
+	hidePaginator?: boolean;
 }) => {
 	return (
 		<div>
-			<div className="flex w-full justify-end pb-2">
-				<Paginator
-					hrefBase={`/products`}
-					currentPage={currentPage}
-					totalPages={productsPagesCount}
-				/>
-			</div>
+			{hidePaginator ? (
+				<></>
+			) : (
+				<div className="flex w-full justify-end pb-2">
+					<Paginator
+						hrefBase={`/products`}
+						currentPage={currentPage}
+						totalPages={productsPagesCount}
+					/>
+				</div>
+			)}
 			<ul
 				className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
 				data-testid="products-list"

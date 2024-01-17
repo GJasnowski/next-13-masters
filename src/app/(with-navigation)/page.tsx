@@ -1,9 +1,14 @@
+import { getProducts } from "@/api/products";
 import { Title } from "@/ui/atoms/Title";
+import { ProductsList } from "@/ui/organisms/ProductsList";
 
-export default function Home() {
+export default async function Home() {
+	const products = await getProducts(1, 4);
+
 	return (
 		<section>
-			<Title>Hello!</Title>
+			<Title>Top products</Title>
+			<ProductsList products={products} currentPage={1} hidePaginator />
 		</section>
 	);
 }

@@ -7,7 +7,6 @@ import { twMerge } from "tailwind-merge";
 
 export type ActiveLinkProps = {
 	activeClassName?: string;
-	ariaLabel?: string;
 	children: React.ReactNode;
 	className?: string;
 	exact?: boolean;
@@ -16,7 +15,6 @@ export type ActiveLinkProps = {
 
 export const ActiveLink = ({
 	activeClassName,
-	ariaLabel,
 	children,
 	className,
 	exact = false,
@@ -30,7 +28,6 @@ export const ActiveLink = ({
 			href={href}
 			className={twMerge(className, active && activeClassName)}
 			aria-current={active ? "page" : undefined}
-			aria-label={ariaLabel}
 		>
 			{children}
 		</Link>

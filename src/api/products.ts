@@ -25,8 +25,10 @@ const dtoToProduct = (dto: ProductDtoType): ProductType => {
 	};
 };
 
-export const getProducts = async (page: number = 1): Promise<ProductType[]> => {
-	const pageSize = 20;
+export const getProducts = async (
+	page: number = 1,
+	pageSize: number = 20,
+): Promise<ProductType[]> => {
 	const offset = (page - 1) * pageSize;
 	const res = await fetch(
 		`https://naszsklep-api.vercel.app/api/products?take=${pageSize}&offset=${offset}`,
