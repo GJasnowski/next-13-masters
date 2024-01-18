@@ -1,0 +1,8 @@
+fragment CollectionDetailed on Collection {
+	id
+	name
+	slug
+	products {
+		...ProductListItem
+	}
+}

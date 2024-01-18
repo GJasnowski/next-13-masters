@@ -8,7 +8,7 @@ export default async function Home() {
 	return (
 		<section>
 			<Title>Top products</Title>
-			<ProductsList products={products} currentPage={1} hidePaginator />
+			<ProductsList products={products} hidePaginator />
 		</section>
 	);
 }

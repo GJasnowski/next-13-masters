@@ -10,14 +10,14 @@ export const ProductsList = ({
 	hrefBase = "/products",
 }: {
 	products: ProductListItemFragment[];
-	currentPage: number;
-	totalPages?: number;
-	hidePaginator?: boolean;
-	hrefBase?: string;
+	currentPage: typeof hidePaginator extends true ? never : number;
+	totalPages: typeof hidePaginator extends true ? never : number;
+	hidePaginator: boolean;
+	hrefBase: string;
 }) => {
 	return (
 		<div>
-			{hidePaginator || !totalPages ? (
+			{hidePaginator ? (
 				<></>
 			) : (
 				<div className="flex w-full justify-end pb-4">
