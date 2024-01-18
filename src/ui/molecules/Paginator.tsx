@@ -19,16 +19,15 @@ export const Paginator = ({ currentPage, hrefBase, totalPages }: PaginatorProps)
 				{ page: currentPage - 1, shouldRender: isBetween(currentPage, 2, totalPages) },
 				{ page: currentPage, shouldRender: isBetween(currentPage, 1, totalPages) },
 				{ page: currentPage + 1, shouldRender: isBetween(currentPage, 1, totalPages - 1) },
-			].map(({ page, shouldRender }) =>
-				shouldRender ? (
-					<div key={page} className="px-1">
-						<PaginatorLink exact href={getHref(hrefBase, page)}>
-							{page}
-						</PaginatorLink>
-					</div>
-				) : (
-					<></>
-				),
+			].map(
+				({ page, shouldRender }) =>
+					shouldRender && (
+						<div key={page} className="px-1">
+							<PaginatorLink exact href={getHref(hrefBase, page)}>
+								{page}
+							</PaginatorLink>
+						</div>
+					),
 			)}
 		</div>
 	);
