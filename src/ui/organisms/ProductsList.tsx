@@ -1,28 +1,25 @@
 import { Paginator } from "../molecules/Paginator";
 import { ProductListItem } from "../molecules/ProductListItem";
 import { type ProductListItemFragment } from "@/gql/graphql";
-import { productsPagesCount } from "@/utils/constants";
 
 export const ProductsList = ({
 	products,
 	currentPage,
+	totalPages,
 	hidePaginator = false,
 }: {
 	products: ProductListItemFragment[];
 	currentPage: number;
+	totalPages?: number;
 	hidePaginator?: boolean;
 }) => {
 	return (
 		<div>
-			{hidePaginator ? (
+			{hidePaginator || !totalPages ? (
 				<></>
 			) : (
 				<div className="flex w-full justify-end pb-4">
-					<Paginator
-						hrefBase={`/products`}
-						currentPage={currentPage}
-						totalPages={productsPagesCount}
-					/>
+					<Paginator hrefBase={`/products`} currentPage={currentPage} totalPages={totalPages} />
 				</div>
 			)}
 			<ul

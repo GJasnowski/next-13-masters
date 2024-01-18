@@ -3,12 +3,14 @@ import {
 	type ProductListItemFragment,
 	type ProductDetailedFragment,
 	ProductGetByIdDocument,
+	ProductsGetCountDocument,
 } from "@/gql/graphql";
 import { executeGraphql } from "@/utils/api";
+import { pageSize as pageSizeConst } from "@/utils/constants";
 
 export const getProducts = async (
 	page: number = 1,
-	pageSize: number = 4,
+	pageSize: number = pageSizeConst,
 ): Promise<ProductListItemFragment[]> => {
 	const offset = (page - 1) * pageSize;
 
@@ -26,4 +28,18 @@ export const getProduct = async (id: string): Promise<ProductDetailedFragment> =
 		id,
 	});
 	return result;
+};
+
+export const getProductsCount = async (): Promise<number> => {
+	const {
+		productsConnection: {
+			aggregate: { count },
+		},
+	} = await executeGraphql(ProductsGetCountDocument, {});
+	return count;
+};
+
+export const getProductsTotalPages = async (pageSize: number = pageSizeConst): Promise<number> => {
+	const count = await getProductsCount();
+	return Math.ceil(count / pageSize);
 };

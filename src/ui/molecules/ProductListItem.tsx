@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ProductImage } from "../atoms/ProductImage";
-import { ProductDescription } from "../atoms/ProductDescription";
+import { ProductBasicData } from "../atoms/ProductBasicData";
 import { type ProductListItemFragment } from "@/gql/graphql";
 
 export const ProductListItem = ({ product }: { product: ProductListItemFragment }) => {
@@ -11,7 +11,7 @@ export const ProductListItem = ({ product }: { product: ProductListItemFragment 
 					<ProductImage product={product} className="h-64 rounded-t-xl bg-slate-800" />
 				</div>
 				<div className="rounded-b-lg">
-					<ProductDescription product={product} className="rounded-b-xl" />
+					<ProductBasicData product={product} className="rounded-b-xl" />
 				</div>
 			</Link>
 		</li>
