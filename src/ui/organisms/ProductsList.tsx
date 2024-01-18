@@ -7,11 +7,13 @@ export const ProductsList = ({
 	currentPage,
 	totalPages,
 	hidePaginator = false,
+	hrefBase = "/products",
 }: {
 	products: ProductListItemFragment[];
 	currentPage: number;
 	totalPages?: number;
 	hidePaginator?: boolean;
+	hrefBase?: string;
 }) => {
 	return (
 		<div>
@@ -19,7 +21,7 @@ export const ProductsList = ({
 				<></>
 			) : (
 				<div className="flex w-full justify-end pb-4">
-					<Paginator hrefBase={`/products`} currentPage={currentPage} totalPages={totalPages} />
+					<Paginator hrefBase={hrefBase} currentPage={currentPage} totalPages={totalPages} />
 				</div>
 			)}
 			<ul

@@ -13,6 +13,9 @@ export const Navbar = () => {
 				<li>
 					<NavbarLink href={"/products/1" as Route}>All</NavbarLink>
 				</li>
+				<li>
+					<NavbarLink href={"/categories" as Route}>Categories</NavbarLink>
+				</li>
 			</ul>
 		</nav>
 	);

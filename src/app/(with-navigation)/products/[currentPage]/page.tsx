@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 
 export const generateStaticParams = async () => {
 	const totalPages = await getProductsTotalPages();
-	return [...Array(totalPages).keys()].map((page) => {
-		routes: [`${page}`];
-	});
+	return [...Array(totalPages).keys()].map((page) => ({
+		params: { currentPage: `${page}` },
+	}));
 };
 
 export default async function Products({
