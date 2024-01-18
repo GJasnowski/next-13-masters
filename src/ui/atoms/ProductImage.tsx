@@ -4,7 +4,7 @@ import { type ProductListItemFragment } from "@/gql/graphql";
 export const ProductImage = ({
 	product: {
 		images: [image],
-		description,
+		name,
 	},
 	className,
 }: {
@@ -23,7 +23,7 @@ export const ProductImage = ({
 
 	return (
 		<div className={wrapperClass}>
-			<img src={image.url} alt={description} />
+			<img src={image.url} alt={name} />
 		</div>
 	);
 };
