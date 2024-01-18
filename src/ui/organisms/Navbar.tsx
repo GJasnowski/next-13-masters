@@ -11,7 +11,7 @@ export const Navbar = () => {
 					</NavbarLink>
 				</li>
 				<li>
-					<NavbarLink href={"/products" as Route}>All</NavbarLink>
+					<NavbarLink href={"/products/1" as Route}>All</NavbarLink>
 				</li>
 			</ul>
 		</nav>

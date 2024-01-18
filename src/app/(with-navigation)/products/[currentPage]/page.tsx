@@ -1,8 +1,9 @@
 import { type Metadata } from "next";
+import { notFound } from "next/navigation";
 import { ProductsList } from "../../../../ui/organisms/ProductsList";
 import { Title } from "@/ui/atoms/Title";
 import { getProducts, getProductsTotalPages } from "@/api/products";
-import { stringToNumber } from "@/utils/general";
+import { isBetween, stringToNumber } from "@/utils/general";
 
 export const metadata: Metadata = {
 	title: "All products",
@@ -17,14 +18,15 @@ export const generateStaticParams = async () => {
 };
 
 export default async function Products({
-	params: { routes = [] },
+	params: { currentPage },
 }: {
-	params: { routes?: string[] };
+	params: { currentPage: string };
 }) {
-	const currentPage = routes[0] ?? "1";
 	const parsedCurrentPage = stringToNumber(currentPage);
-
 	const totalPages = await getProductsTotalPages();
+
+	if (!isBetween(parsedCurrentPage, 1, totalPages)) return notFound();
+
 	const products = await getProducts(parsedCurrentPage);
 
 	return (

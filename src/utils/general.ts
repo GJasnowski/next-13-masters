@@ -3,6 +3,6 @@ export const stringToNumber = (string: string): number => {
 	return isNaN(parsed) ? 1 : parsed;
 };
 
-export const isBetween = (min: number, max: number, value: number): boolean => {
+export const isBetween = (value: number, min: number, max: number): boolean => {
 	return value >= min && value <= max;
 };

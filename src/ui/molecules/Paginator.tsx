@@ -16,9 +16,9 @@ export const Paginator = ({ currentPage, hrefBase, totalPages }: PaginatorProps)
 	return (
 		<div className="flex" aria-label="pagination">
 			{[
-				{ page: currentPage - 1, shouldRender: isBetween(2, totalPages, currentPage) },
-				{ page: currentPage, shouldRender: isBetween(1, totalPages, currentPage) },
-				{ page: currentPage + 1, shouldRender: isBetween(1, totalPages - 1, currentPage) },
+				{ page: currentPage - 1, shouldRender: isBetween(currentPage, 2, totalPages) },
+				{ page: currentPage, shouldRender: isBetween(currentPage, 1, totalPages) },
+				{ page: currentPage + 1, shouldRender: isBetween(currentPage, 1, totalPages - 1) },
 			].map(({ page, shouldRender }) =>
 				shouldRender ? (
 					<div key={page} className="px-1">
