@@ -14,6 +14,6 @@ export const getCategoryBySlug = async (slug: string): Promise<CategoryDetailedF
 };
 
 export const getCategories = async (): Promise<CategoryListItemFragment[]> => {
-	const { categories } = await executeGraphql(CategoriesGetListDocument, {});
+	const { categories } = await executeGraphql(CategoriesGetListDocument);
 	return categories;
 };

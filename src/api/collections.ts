@@ -16,6 +16,6 @@ export const getCollectionBySlug = async (slug: string): Promise<CollectionDetai
 };
 
 export const getCollections = async (): Promise<CollectionListItemFragment[]> => {
-	const { collections } = await executeGraphql(CollectionsGetListDocument, {});
+	const { collections } = await executeGraphql(CollectionsGetListDocument);
 	return collections;
 };

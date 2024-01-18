@@ -37,7 +37,7 @@ export const getProductsCount = async (): Promise<number> => {
 		productsConnection: {
 			aggregate: { count },
 		},
-	} = await executeGraphql(ProductsGetCountDocument, {});
+	} = await executeGraphql(ProductsGetCountDocument);
 	return count;
 };
 

@@ -4,7 +4,7 @@ import { Title } from "@/ui/atoms/Title";
 import { ProductsList } from "@/ui/organisms/ProductsList";
 import { getCollectionBySlug, getCollections } from "@/api/collections";
 
-export const collectionSlugz = async ({
+export const generateMetadata = async ({
 	params: { collectionSlug },
 }: {
 	params: { collectionSlug: string };
@@ -33,7 +33,7 @@ export default async function Category({
 	return (
 		<section>
 			<Title>{collection.name}</Title>
-			<ProductsList products={collection.products} hidePaginator />
+			<ProductsList products={collection.products} />
 		</section>
 	);
 }
