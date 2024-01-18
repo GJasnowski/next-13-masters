@@ -17,7 +17,7 @@ export const ProductsList = ({
 			{hidePaginator ? (
 				<></>
 			) : (
-				<div className="flex w-full justify-end pb-2">
+				<div className="flex w-full justify-end pb-4">
 					<Paginator
 						hrefBase={`/products`}
 						currentPage={currentPage}
