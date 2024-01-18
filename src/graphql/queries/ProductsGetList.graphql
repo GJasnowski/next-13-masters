@@ -1,0 +1,5 @@
+query ProductsGetList($count: Int!, $skip: Int = 0) {
+	products(first: $count, skip: $skip) {
+		...ProductListItem
+	}
+}

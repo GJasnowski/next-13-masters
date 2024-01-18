@@ -1,11 +1,11 @@
 import { twMerge } from "tailwind-merge";
-import { type ProductType } from "../types";
+import { type ProductListItemFragment } from "@/gql/graphql";
 
 export const ProductDescription = ({
-	product: { title, description, price },
+	product: { name, description, price },
 	className,
 }: {
-	product: ProductType;
+	product: ProductListItemFragment;
 	className?: string;
 }) => {
 	const wrapperClass = twMerge(
@@ -14,7 +14,7 @@ export const ProductDescription = ({
 	);
 	return (
 		<div className={wrapperClass}>
-			<h3 className="title-font self-center text-lg font-medium">{title}</h3>
+			<h3 className="title-font self-center text-lg font-medium">{name}</h3>
 			<p className="mt-2 h-20 overflow-hidden">{description}</p>
 			<p className="mt-2 self-center font-bold">${price}</p>
 		</div>

@@ -1,6 +1,6 @@
 import { Paginator } from "../molecules/Paginator";
 import { ProductListItem } from "../molecules/ProductListItem";
-import { type ProductType } from "../types";
+import { type ProductListItemFragment } from "@/gql/graphql";
 import { productsPagesCount } from "@/utils/constants";
 
 export const ProductsList = ({
@@ -8,7 +8,7 @@ export const ProductsList = ({
 	currentPage,
 	hidePaginator = false,
 }: {
-	products: ProductType[];
+	products: ProductListItemFragment[];
 	currentPage: number;
 	hidePaginator?: boolean;
 }) => {

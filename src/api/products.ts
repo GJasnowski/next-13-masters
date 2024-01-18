@@ -1,44 +1,29 @@
-import { type ProductType } from "@/ui/types";
-
-type ProductDtoType = {
-	id: string;
-	title: string;
-	price: number;
-	description: string;
-	longDescription: string;
-	image: string;
-	category: string;
-	rating: {
-		rate: number;
-		count: number;
-	};
-};
-
-const dtoToProduct = (dto: ProductDtoType): ProductType => {
-	return {
-		id: dto.id,
-		title: dto.title,
-		price: dto.price,
-		description: dto.description,
-		longDescription: dto.longDescription,
-		imageSrc: dto.image,
-	};
-};
+import {
+	ProductsGetListDocument,
+	type ProductListItemFragment,
+	type ProductDetailedFragment,
+	ProductGetByIdDocument,
+} from "@/gql/graphql";
+import { executeGraphql } from "@/utils/api";
 
 export const getProducts = async (
 	page: number = 1,
-	pageSize: number = 20,
-): Promise<ProductType[]> => {
+	pageSize: number = 4,
+): Promise<ProductListItemFragment[]> => {
 	const offset = (page - 1) * pageSize;
-	const res = await fetch(
-		`https://naszsklep-api.vercel.app/api/products?take=${pageSize}&offset=${offset}`,
-	);
-	const dtos = (await res.json()) as ProductDtoType[];
-	return dtos.map(dtoToProduct);
+
+	const { products } = await executeGraphql(ProductsGetListDocument, {
+		count: pageSize,
+		skip: offset,
+	});
+	return products;
 };
 
-export const getProduct = async (id: string): Promise<ProductType> => {
-	const res = await fetch(`https://naszsklep-api.vercel.app/api/products/${id}`);
-	const dto = (await res.json()) as ProductDtoType;
-	return dtoToProduct(dto);
+export const getProduct = async (id: string): Promise<ProductDetailedFragment> => {
+	const {
+		products: [result],
+	} = await executeGraphql(ProductGetByIdDocument, {
+		id,
+	});
+	return result;
 };
