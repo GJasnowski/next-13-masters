@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 import { type ProductListItemFragment } from "@/gql/graphql";
 
@@ -23,7 +24,14 @@ export const ProductImage = ({
 
 	return (
 		<div className={wrapperClass}>
-			<img src={image.url} alt={name} />
+			<Image
+				src={image.url}
+				alt={name}
+				width={0}
+				height={0}
+				sizes="100vw"
+				style={{ height: "100%", width: "100%" }}
+			/>
 		</div>
 	);
 };
