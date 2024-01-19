@@ -38,7 +38,7 @@ export default async function Category({
 
 	if (!isBetween(parsedCurrentPage, 1, totalPages)) return notFound();
 
-	const products = await getProductsByCategorySlug(categorySlug);
+	const products = await getProductsByCategorySlug(categorySlug, parsedCurrentPage);
 
 	return (
 		<section>
