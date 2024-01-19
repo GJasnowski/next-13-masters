@@ -10737,7 +10737,7 @@ export type CollectionDetailedFragment = { id: string, name: string, slug: strin
 
 export type CollectionListItemFragment = { id: string, name: string, slug: string };
 
-export type ProductDetailedFragment = { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> };
+export type ProductDetailedFragment = { id: string, name: string, description: string, price: number, images: Array<{ id: string, url: string }>, variants: Array<{ id: string, name: string, color: ProductColor } | { id: string, name: string, color: ProductColor, size: ProductSize } | { id: string, name: string, size: ProductSize }> };
 
 export type ProductListItemFragment = { id: string, name: string, price: number, images: Array<{ url: string }> };
 
@@ -10770,7 +10770,7 @@ export type ProductGetByIdQueryVariables = Exact<{
 }>;
 
 
-export type ProductGetByIdQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+export type ProductGetByIdQuery = { products: Array<{ id: string, name: string, description: string, price: number, images: Array<{ id: string, url: string }>, variants: Array<{ id: string, name: string, color: ProductColor } | { id: string, name: string, color: ProductColor, size: ProductSize } | { id: string, name: string, size: ProductSize }> }> };
 
 export type ProductsGetCountQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10876,13 +10876,29 @@ export const ProductDetailedFragmentDoc = new TypedDocumentString(`
   id
   name
   description
-  categories(first: 4) {
-    name
-  }
-  images(first: 4) {
+  price
+  images(first: 1) {
+    id
     url
   }
-  price
+  variants {
+    ... on ProductColorVariant {
+      id
+      name
+      color
+    }
+    ... on ProductSizeColorVariant {
+      id
+      name
+      color
+      size
+    }
+    ... on ProductSizeVariant {
+      id
+      name
+      size
+    }
+  }
 }
     `, {"fragmentName":"ProductDetailed"}) as unknown as TypedDocumentString<ProductDetailedFragment, unknown>;
 export const CategoriesGetListDocument = new TypedDocumentString(`
@@ -10951,13 +10967,29 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
   id
   name
   description
-  categories(first: 4) {
-    name
-  }
-  images(first: 4) {
+  price
+  images(first: 1) {
+    id
     url
   }
-  price
+  variants {
+    ... on ProductColorVariant {
+      id
+      name
+      color
+    }
+    ... on ProductSizeColorVariant {
+      id
+      name
+      color
+      size
+    }
+    ... on ProductSizeVariant {
+      id
+      name
+      size
+    }
+  }
 }`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
 export const ProductsGetCountDocument = new TypedDocumentString(`
     query ProductsGetCount {
