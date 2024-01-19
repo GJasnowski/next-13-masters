@@ -10801,6 +10801,13 @@ export type ProductsGetListByCategorySlugQueryVariables = Exact<{
 
 export type ProductsGetListByCategorySlugQuery = { products: Array<{ id: string, name: string, price: number, images: Array<{ url: string }> }> };
 
+export type ProductsRelatedGetListByIdQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type ProductsRelatedGetListByIdQuery = { products: Array<{ id: string, name: string, price: number, images: Array<{ url: string }> }> };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -11002,3 +11009,17 @@ export const ProductsGetListByCategorySlugDocument = new TypedDocumentString(`
   }
   price
 }`) as unknown as TypedDocumentString<ProductsGetListByCategorySlugQuery, ProductsGetListByCategorySlugQueryVariables>;
+export const ProductsRelatedGetListByIdDocument = new TypedDocumentString(`
+    query ProductsRelatedGetListById($id: ID!) {
+  products(first: 4, where: {id_not: $id}) {
+    ...ProductListItem
+  }
+}
+    fragment ProductListItem on Product {
+  id
+  name
+  images(first: 1) {
+    url
+  }
+  price
+}`) as unknown as TypedDocumentString<ProductsRelatedGetListByIdQuery, ProductsRelatedGetListByIdQueryVariables>;

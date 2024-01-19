@@ -6,6 +6,7 @@ import {
 	ProductsGetCountDocument,
 	ProductsGetListByCategorySlugDocument,
 	ProductsGetCountByCategorySlugDocument,
+	ProductsRelatedGetListByIdDocument,
 } from "@/gql/graphql";
 import { executeGraphql } from "@/utils/api";
 import { pageSize as pageSizeConst } from "@/utils/constants";
@@ -76,4 +77,9 @@ export const getProductsTotalPagesByCategorySlug = async (
 ): Promise<number> => {
 	const count = await getProductsCountByCategorySlug(categorySlug);
 	return Math.ceil(count / pageSize);
+};
+
+export const getProductsRelatedById = async (id: string): Promise<ProductListItemFragment[]> => {
+	const { products } = await executeGraphql(ProductsRelatedGetListByIdDocument, { id });
+	return products;
 };
