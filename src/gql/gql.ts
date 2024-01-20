@@ -27,7 +27,7 @@ const documents = {
     "query ProductGetById($id: ID!) {\n  products(where: {id: $id}) {\n    ...ProductDetailed\n  }\n}": types.ProductGetByIdDocument,
     "query ProductsGetCount {\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetCountDocument,
     "query ProductsGetCountByCategorySlug($categorySlug: String) {\n  productsConnection(where: {categories_some: {slug: $categorySlug}}) {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetCountByCategorySlugDocument,
-    "query ProductsGetList($count: Int!, $skip: Int = 0, $filter: String = \"\") {\n  products(first: $count, skip: $skip, where: {_search: $filter}) {\n    ...ProductListItem\n  }\n  productsConnection(where: {_search: $filter}) {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetListDocument,
+    "query ProductsGetList($count: Int!, $skip: Int = 0, $needle: String = \"\") {\n  products(first: $count, skip: $skip, where: {_search: $needle}) {\n    ...ProductListItem\n  }\n  productsConnection(where: {_search: $needle}) {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetListDocument,
     "query ProductsGetListByCategorySlug($count: Int!, $skip: Int = 0, $categorySlug: String!) {\n  products(\n    first: $count\n    skip: $skip\n    where: {categories_some: {slug: $categorySlug}}\n  ) {\n    ...ProductListItem\n  }\n}": types.ProductsGetListByCategorySlugDocument,
     "query ProductsRelatedGetListById($id: ID!) {\n  products(first: 4, where: {id_not: $id}) {\n    ...ProductListItem\n  }\n}": types.ProductsRelatedGetListByIdDocument,
 };
@@ -87,7 +87,7 @@ export function graphql(source: "query ProductsGetCountByCategorySlug($categoryS
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetList($count: Int!, $skip: Int = 0, $filter: String = \"\") {\n  products(first: $count, skip: $skip, where: {_search: $filter}) {\n    ...ProductListItem\n  }\n  productsConnection(where: {_search: $filter}) {\n    aggregate {\n      count\n    }\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
+export function graphql(source: "query ProductsGetList($count: Int!, $skip: Int = 0, $needle: String = \"\") {\n  products(first: $count, skip: $skip, where: {_search: $needle}) {\n    ...ProductListItem\n  }\n  productsConnection(where: {_search: $needle}) {\n    aggregate {\n      count\n    }\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

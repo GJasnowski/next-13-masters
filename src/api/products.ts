@@ -28,8 +28,8 @@ export const getProduct = async (id: string): Promise<ProductDetailedFragment> =
 export const getProducts = async ({
 	page = 1,
 	pageSize = pageSizeConst,
-	filter = "",
-}: PaginationProps & { filter?: string }): Promise<{
+	needle = "",
+}: PaginationProps & { needle?: string }): Promise<{
 	products: ProductListItemFragment[];
 	totalPages: number;
 }> => {
@@ -43,7 +43,7 @@ export const getProducts = async ({
 	} = await executeGraphql(ProductsGetListDocument, {
 		count: pageSize,
 		skip: offset,
-		filter,
+		needle,
 	});
 	const totalPages = Math.ceil(count / pageSize);
 	return { products, totalPages };
