@@ -10787,10 +10787,11 @@ export type ProductsGetCountByCategorySlugQuery = { productsConnection: { aggreg
 export type ProductsGetListQueryVariables = Exact<{
   count: Scalars['Int']['input'];
   skip?: InputMaybe<Scalars['Int']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type ProductsGetListQuery = { products: Array<{ id: string, name: string, price: number, images: Array<{ url: string }> }> };
+export type ProductsGetListQuery = { products: Array<{ id: string, name: string, price: number, images: Array<{ url: string }> }>, productsConnection: { aggregate: { count: number } } };
 
 export type ProductsGetListByCategorySlugQueryVariables = Exact<{
   count: Scalars['Int']['input'];
@@ -11010,9 +11011,14 @@ export const ProductsGetCountByCategorySlugDocument = new TypedDocumentString(`
 }
     `) as unknown as TypedDocumentString<ProductsGetCountByCategorySlugQuery, ProductsGetCountByCategorySlugQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
-    query ProductsGetList($count: Int!, $skip: Int = 0) {
-  products(first: $count, skip: $skip) {
+    query ProductsGetList($count: Int!, $skip: Int = 0, $filter: String = "") {
+  products(first: $count, skip: $skip, where: {_search: $filter}) {
     ...ProductListItem
+  }
+  productsConnection(where: {_search: $filter}) {
+    aggregate {
+      count
+    }
   }
 }
     fragment ProductListItem on Product {

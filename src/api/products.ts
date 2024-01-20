@@ -11,6 +11,11 @@ import {
 import { executeGraphql } from "@/utils/api";
 import { pageSize as pageSizeConst } from "@/utils/constants";
 
+type PaginationProps = {
+	page?: number;
+	pageSize?: number;
+};
+
 export const getProduct = async (id: string): Promise<ProductDetailedFragment> => {
 	const {
 		products: [result],
@@ -20,17 +25,28 @@ export const getProduct = async (id: string): Promise<ProductDetailedFragment> =
 	return result;
 };
 
-export const getProducts = async (
-	page: number = 1,
-	pageSize: number = pageSizeConst,
-): Promise<ProductListItemFragment[]> => {
+export const getProducts = async ({
+	page = 1,
+	pageSize = pageSizeConst,
+	filter = "",
+}: PaginationProps & { filter?: string }): Promise<{
+	products: ProductListItemFragment[];
+	totalPages: number;
+}> => {
 	const offset = (page - 1) * pageSize;
 
-	const { products } = await executeGraphql(ProductsGetListDocument, {
+	const {
+		products,
+		productsConnection: {
+			aggregate: { count },
+		},
+	} = await executeGraphql(ProductsGetListDocument, {
 		count: pageSize,
 		skip: offset,
+		filter,
 	});
-	return products;
+	const totalPages = Math.ceil(count / pageSize);
+	return { products, totalPages };
 };
 
 export const getProductsCount = async (): Promise<number> => {

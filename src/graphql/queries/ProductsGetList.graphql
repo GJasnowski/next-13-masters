@@ -1,5 +1,10 @@
-query ProductsGetList($count: Int!, $skip: Int = 0) {
-	products(first: $count, skip: $skip) {
+query ProductsGetList($count: Int!, $skip: Int = 0, $filter: String = "") {
+	products(first: $count, skip: $skip, where: { _search: $filter }) {
 		...ProductListItem
+	}
+	productsConnection(where: { _search: $filter }) {
+		aggregate {
+			count
+		}
 	}
 }

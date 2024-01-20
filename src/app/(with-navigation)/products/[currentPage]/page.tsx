@@ -23,11 +23,9 @@ export default async function Products({
 	params: { currentPage: string };
 }) {
 	const parsedCurrentPage = stringToNumber(currentPage);
-	const totalPages = await getProductsTotalPages();
+	const { products, totalPages } = await getProducts({ page: parsedCurrentPage });
 
 	if (!isBetween(parsedCurrentPage, 1, totalPages)) return notFound();
-
-	const products = await getProducts(parsedCurrentPage);
 
 	return (
 		<section className="flex w-full justify-center">
