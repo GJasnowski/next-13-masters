@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, type ChangeEvent } from "react";
+import { useEffect, useState, useCallback, type ChangeEvent, useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type Route } from "next";
 import { SearchInput } from "../atoms/SearchInput";
@@ -11,25 +11,44 @@ export const SearchBox = () => {
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 
-	const [needle, setNeedle] = useState(
-		pathname === "/search" ? searchParams.get("query") || "" : "",
+	const initialNeedle = useMemo(
+		() => (pathname === "/search" ? searchParams.get("query") || "" : ""),
+		[pathname, searchParams],
 	);
+	const [needle, setNeedle] = useState(initialNeedle);
 
-	const onChange = useCallback(
-		(e: ChangeEvent<HTMLInputElement>) => {
-			setNeedle(e.target.value);
+	const search = useCallback(
+		(_needle: string) => {
+			router.push(`/search?query=${_needle}` as Route);
 		},
-		[setNeedle],
+		[router],
 	);
 
-	const search = useCallback(() => {
-		router.push(`/search?query=${needle}` as Route);
-	}, [router, needle]);
+	useEffect(() => {
+		if (needle === initialNeedle) return;
+
+		const timeoutId = setTimeout(() => {
+			search(needle);
+		}, 500);
+		return () => {
+			clearTimeout(timeoutId);
+		};
+	}, [initialNeedle, needle, search]);
+
+	const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+		setNeedle(e.target.value);
+	}, []);
 
 	return (
 		<div>
 			<SearchInput needle={needle} onChange={onChange} />
-			<Button onClick={search}>OK</Button>
+			<Button
+				onClick={() => {
+					search(needle);
+				}}
+			>
+				OK
+			</Button>
 		</div>
 	);
 };
