@@ -1,19 +1,13 @@
-import { type Route } from "next";
-import { NavbarLink } from "../atoms/NavbarLink";
+import { SearchBox } from "../molecules/SearchBox";
+import { NavbarLinks } from "../molecules/NavbarLinks";
 
-export const Navbar = () => {
+export const Navbar = async () => {
 	return (
 		<nav className="flex w-full justify-center bg-slate-900">
-			<ul className="flex w-full max-w-7xl justify-start p-4">
-				<li>
-					<NavbarLink href="/" exact>
-						Home
-					</NavbarLink>
-				</li>
-				<li>
-					<NavbarLink href={"/products" as Route}>All</NavbarLink>
-				</li>
-			</ul>
+			<div className="justify- flex w-full max-w-7xl items-center justify-between">
+				<NavbarLinks />
+				<SearchBox />
+			</div>
 		</nav>
 	);
 };

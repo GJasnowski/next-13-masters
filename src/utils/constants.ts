@@ -1,1 +1,1 @@
-export const productsPagesCount = 5;
+export const pageSize = 4;

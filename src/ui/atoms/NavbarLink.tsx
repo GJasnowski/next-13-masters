@@ -3,7 +3,7 @@ import { ActiveLink, type ActiveLinkProps } from "./ActiveLink";
 
 export const NavbarLink = ({ className, activeClassName, ...additionalProps }: ActiveLinkProps) => {
 	const navbarLinkClassName = twMerge("hover:text-amber-200", className);
-	const activeNavbarLinkClassName = twMerge("text-amber-300 font-bold", activeClassName);
+	const activeNavbarLinkClassName = twMerge("text-amber-300", activeClassName);
 
 	return (
 		<div className="px-4">

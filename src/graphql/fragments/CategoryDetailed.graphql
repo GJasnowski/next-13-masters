@@ -1,0 +1,6 @@
+fragment CategoryDetailed on Category {
+	id
+	slug
+	name
+	description
+}

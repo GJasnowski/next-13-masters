@@ -1,0 +1,28 @@
+fragment ProductDetailed on Product {
+	id
+	name
+	description
+	price
+	images(first: 1) {
+		id
+		url
+	}
+	variants {
+		... on ProductColorVariant {
+			id
+			name
+			color
+		}
+		... on ProductSizeColorVariant {
+			id
+			name
+			color
+			size
+		}
+		... on ProductSizeVariant {
+			id
+			name
+			size
+		}
+	}
+}

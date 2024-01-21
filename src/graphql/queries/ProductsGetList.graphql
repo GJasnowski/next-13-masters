@@ -1,0 +1,10 @@
+query ProductsGetList($count: Int!, $skip: Int = 0, $needle: String = "") {
+	products(first: $count, skip: $skip, where: { _search: $needle }) {
+		...ProductListItem
+	}
+	productsConnection(where: { _search: $needle }) {
+		aggregate {
+			count
+		}
+	}
+}
