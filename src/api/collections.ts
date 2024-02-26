@@ -6,13 +6,13 @@ import {
 	CollectionGetBySlugDocument,
 } from "@/gql/graphql";
 
-export const getCollectionBySlug = async (slug: string): Promise<CollectionDetailedFragment> => {
-	const {
-		collections: [result],
-	} = await executeGraphql(CollectionGetBySlugDocument, {
+export const getCollectionBySlug = async (
+	slug: string,
+): Promise<CollectionDetailedFragment | undefined> => {
+	const { collections } = await executeGraphql(CollectionGetBySlugDocument, {
 		slug,
 	});
-	return result;
+	return collections[0] ?? undefined;
 };
 
 export const getCollections = async (): Promise<CollectionListItemFragment[]> => {

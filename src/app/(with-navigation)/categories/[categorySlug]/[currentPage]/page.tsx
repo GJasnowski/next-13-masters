@@ -13,8 +13,7 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
 	const category = await getCategoryBySlug(categorySlug);
 	return {
-		title: category.name,
-		description: category.description,
+		title: category?.name,
 	};
 };
 

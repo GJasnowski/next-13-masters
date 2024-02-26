@@ -1,5 +1,5 @@
 query CategoryGetBySlug($slug: String!) {
-	categories(where: { slug: $slug }) {
+	categories(slug: $slug) {
 		...CategoryDetailed
 	}
 }

@@ -8,7 +8,7 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: "https",
-				hostname: "media.graphassets.com",
+				hostname: "loremflickr.com",
 				pathname: "**",
 			},
 		],

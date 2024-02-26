@@ -1,8 +1,6 @@
 fragment ProductListItem on Product {
 	id
 	name
-	images(first: 1) {
-		url
-	}
+	image
 	price
 }
