@@ -11,11 +11,14 @@ export const SearchBox = () => {
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 
-	const initialNeedle = useMemo(
-		() => (pathname === "/search" ? searchParams.get("query") || "" : ""),
-		[pathname, searchParams],
+	const [needle, setNeedle] = useState(
+		pathname === "/search" ? searchParams.get("query") || "" : "",
 	);
-	const [needle, setNeedle] = useState(initialNeedle);
+
+	const [searchAllowed, setSearchAllowed] = useState(false);
+	useEffect(() => {
+		setSearchAllowed(false);
+	}, [pathname]);
 
 	const search = useCallback(
 		(_needle: string) => {
@@ -25,7 +28,7 @@ export const SearchBox = () => {
 	);
 
 	useEffect(() => {
-		if (needle === initialNeedle) return;
+		if (!searchAllowed) return;
 
 		const timeoutId = setTimeout(() => {
 			search(needle);
@@ -33,9 +36,10 @@ export const SearchBox = () => {
 		return () => {
 			clearTimeout(timeoutId);
 		};
-	}, [initialNeedle, needle, search]);
+	}, [searchAllowed, needle, search]);
 
 	const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+		setSearchAllowed(true);
 		setNeedle(e.target.value);
 	}, []);
 
