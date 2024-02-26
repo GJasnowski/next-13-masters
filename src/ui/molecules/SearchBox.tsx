@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, type ChangeEvent, useMemo } from "react";
+import { useEffect, useState, useCallback, type ChangeEvent } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type Route } from "next";
 import { SearchInput } from "../atoms/SearchInput";
