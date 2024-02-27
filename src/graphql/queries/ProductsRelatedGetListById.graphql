@@ -1,5 +1,5 @@
 query ProductsRelatedGetListById($id: ID!) {
-	products(first: 4, where: { id_not: $id }) {
+	products(take: 4, notId: $id) {
 		...ProductListItem
 	}
 }

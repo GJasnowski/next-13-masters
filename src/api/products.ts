@@ -16,13 +16,11 @@ type PaginationProps = {
 	pageSize?: number;
 };
 
-export const getProduct = async (id: string): Promise<ProductDetailedFragment> => {
-	const {
-		products: [result],
-	} = await executeGraphql(ProductGetByIdDocument, {
+export const getProduct = async (id: string): Promise<ProductDetailedFragment | undefined> => {
+	const { product } = await executeGraphql(ProductGetByIdDocument, {
 		id,
 	});
-	return result;
+	return product ?? undefined;
 };
 
 export const getProducts = async ({
@@ -35,27 +33,18 @@ export const getProducts = async ({
 }> => {
 	const offset = (page - 1) * pageSize;
 
-	const {
-		products,
-		productsConnection: {
-			aggregate: { count },
-		},
-	} = await executeGraphql(ProductsGetListDocument, {
+	const { products, productsCount } = await executeGraphql(ProductsGetListDocument, {
 		count: pageSize,
 		skip: offset,
 		needle,
 	});
-	const totalPages = Math.ceil(count / pageSize);
+	const totalPages = Math.ceil(productsCount / pageSize);
 	return { products, totalPages };
 };
 
 export const getProductsCount = async (): Promise<number> => {
-	const {
-		productsConnection: {
-			aggregate: { count },
-		},
-	} = await executeGraphql(ProductsGetCountDocument);
-	return count;
+	const { productsCount } = await executeGraphql(ProductsGetCountDocument);
+	return productsCount;
 };
 
 export const getProductsTotalPages = async (pageSize: number = pageSizeConst): Promise<number> => {
@@ -79,12 +68,10 @@ export const getProductsByCategorySlug = async (
 };
 
 export const getProductsCountByCategorySlug = async (categorySlug: string): Promise<number> => {
-	const {
-		productsConnection: {
-			aggregate: { count },
-		},
-	} = await executeGraphql(ProductsGetCountByCategorySlugDocument, { categorySlug });
-	return count;
+	const { productsCount } = await executeGraphql(ProductsGetCountByCategorySlugDocument, {
+		categorySlug,
+	});
+	return productsCount;
 };
 
 export const getProductsTotalPagesByCategorySlug = async (

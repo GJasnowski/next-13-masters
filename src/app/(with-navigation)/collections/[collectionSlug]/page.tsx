@@ -11,7 +11,7 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
 	const collection = await getCollectionBySlug(collectionSlug);
 	return {
-		title: collection.name,
+		title: collection?.name,
 	};
 };
 

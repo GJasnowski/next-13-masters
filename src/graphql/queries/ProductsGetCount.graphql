@@ -1,7 +1,3 @@
 query ProductsGetCount {
-	productsConnection {
-		aggregate {
-			count
-		}
-	}
+	productsCount
 }

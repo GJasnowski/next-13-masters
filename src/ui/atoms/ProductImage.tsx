@@ -3,10 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { type ProductListItemFragment } from "@/gql/graphql";
 
 export const ProductImage = ({
-	product: {
-		images: [image],
-		name,
-	},
+	product: { image, name },
 	className,
 }: {
 	product: ProductListItemFragment;
@@ -25,7 +22,7 @@ export const ProductImage = ({
 	return (
 		<div className={wrapperClass}>
 			<Image
-				src={image.url}
+				src={image}
 				alt={name}
 				width={0}
 				height={0}

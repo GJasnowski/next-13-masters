@@ -3,26 +3,9 @@ fragment ProductDetailed on Product {
 	name
 	description
 	price
-	images(first: 1) {
-		id
-		url
-	}
+	image
 	variants {
-		... on ProductColorVariant {
-			id
-			name
-			color
-		}
-		... on ProductSizeColorVariant {
-			id
-			name
-			color
-			size
-		}
-		... on ProductSizeVariant {
-			id
-			name
-			size
-		}
+		id
+		name
 	}
 }

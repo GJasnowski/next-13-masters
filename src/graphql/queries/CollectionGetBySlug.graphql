@@ -1,5 +1,5 @@
 query CollectionGetBySlug($slug: String!) {
-	collections(where: { slug: $slug }) {
+	collections(slug: $slug) {
 		...CollectionDetailed
 	}
 }

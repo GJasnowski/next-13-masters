@@ -21,7 +21,7 @@ export const ProductVariantSelector = ({
 			name="variant"
 			id="variant"
 			className="rounded bg-slate-100 p-0.5 text-slate-900 outline-none"
-			value={searchParams.get("variant") || variants[0].id}
+			value={searchParams.get("variant") || variants[0]?.id}
 			onChange={(e) => {
 				const newSearchParams = getUpdatedSearchParams(searchParams, { variant: e.target.value });
 				router.push(`${pathname}?${newSearchParams}` as Route);
